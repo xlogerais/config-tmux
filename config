@@ -1,0 +1,29 @@
+# Set history size
+set -g history-limit 10000
+
+# Force terminal for 256 colors support
+set -g default-terminal "screen-256color"
+
+# Display titles
+set -g set-titles on
+set -g set-titles-string "#T"
+
+# Make splitting more intuitive
+unbind %
+bind | split-window -h
+bind _ split-window -v
+
+# Keybindings
+bind -n S-up new-window
+bind -n S-down new-window
+
+bind -n C-left prev
+bind -n C-right next
+
+bind -n S-left swap-window -t -1
+bind -n S-right swap-window -t +1
+
+bind z resize-pane -Z
+
+# Mouse
+set -g mouse on
