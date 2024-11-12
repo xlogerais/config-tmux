@@ -1,8 +1,29 @@
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-pain-control'
+set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'tmux-plugins/tmux-copycat'
+set -g @plugin 'erikw/tmux-powerline'
+set -g @plugin "nordtheme/tmux"
+
+# Mouse
+set -g mouse on
+
+############### [Personal settings] ###############
+
 # Set history size
-set -g history-limit 10000
+# set -g history-limit 10000
 
 # Force terminal for 256 colors support
-set -g default-terminal "screen-256color"
+set -g default-terminal "tmux-256color"
+# You can find the definition file here : https://github.com/tmux/tmux/files/1725937/tmux-256color.terminfo.txt
+# and install it with this command : tic -x tmux-256color.terminfo.txt
+# Alternative if tmux-256color is not available
+# set -g default-terminal "screen-256color"
+set -as terminal-overrides ",*256col*:RGB"
+set -as terminal-overrides ",*256col*:Tc"
+
 
 # Display titles
 set -g set-titles on
@@ -10,8 +31,8 @@ set -g set-titles-string "#T"
 
 # Make splitting more intuitive
 unbind %
-bind | split-window -h
-bind _ split-window -v
+# bind | split-window -h
+# bind _ split-window -v
 
 # Keybindings
 bind -n S-up new-window
@@ -25,5 +46,16 @@ bind -n S-right swap-window -t +1
 
 bind z resize-pane -Z
 
-# Mouse
-set -g mouse on
+bind -n F8 new-window qbco
+# bind -n F8 new-window bash -c 'source ~/Repositories/Gitlab/bash-tools/libs/kgb.bash && source ~/Repositories/Gitlab/bash-tools/libs/misc.bash && qbco'
+bind -n F9 new-window qb9s
+bind -n S-F9 split-window qb9s
+
+# Other examples:
+# set -g @plugin 'github_username/plugin_name'
+# set -g @plugin 'github_username/plugin_name#branch'
+# set -g @plugin 'git@github.com:user/plugin'
+# set -g @plugin 'git@bitbucket.com:user/plugin'
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'
