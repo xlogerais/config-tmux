@@ -1,4 +1,55 @@
-# List of plugins
+############### [Personal settings] ###############
+
+# Mouse
+set -g mouse on
+
+# Display titles
+set -g set-titles on
+set -g set-titles-string "#T"
+
+# Set history size
+# INFO: This is now set by the tmux-sensitive plugin
+# set -g history-limit 10000
+
+# Make splitting more intuitive
+# INFO: This is now set by the tmux-pain-control plugin
+# bind | split-window -h
+# bind _ split-window -v
+
+# Force terminal for 256 colors support
+# set -g default-terminal "screen-256color"
+set -g default-terminal "tmux-256color"
+# You can find the definition file here : https://github.com/tmux/tmux/files/1725937/tmux-256color.terminfo.txt
+# and install it with this command : tic -x tmux-256color.terminfo.txt
+# Alternative if tmux-256color is not available
+set -as terminal-overrides ",*256col*:RGB"
+set -as terminal-overrides ",*256col*:Tc"
+
+# Keybindings
+
+unbind %
+
+bind -n S-up new-window
+bind -n S-down new-window
+
+bind -n C-left prev
+bind -n C-right next
+bind -n C-tab next
+
+bind -n S-left swap-window -t -1
+bind -n S-right swap-window -t +1
+
+bind z resize-pane -Z
+
+# bind -n F8 new-window qbco
+# bind -n F8 new-window bash -c 'source ~/Repositories/Gitlab/bash-tools/libs/kgb.bash && source ~/Repositories/Gitlab/bash-tools/libs/misc.bash && qbco'
+bind -n -N "Select cluster with fzf, authenticate with qbco then launch k9s in a new window"   F9 new-window qb9s
+bind -n -N "Select cluster with fzf, authenticate with qbco then launch k9s in a split window" S-F9 split-window qb9s
+bind    -N "emit F9 key press with prefix-F9 (because we have bound F9 to another shortcut)"   F9 send-keys F9
+
+############### [ Plugins ] ###############
+
+# List of plugins to install
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'tmux-plugins/tmux-pain-control'
@@ -6,50 +57,6 @@ set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @plugin 'tmux-plugins/tmux-copycat'
 set -g @plugin 'erikw/tmux-powerline'
 set -g @plugin "nordtheme/tmux"
-
-# Mouse
-set -g mouse on
-
-############### [Personal settings] ###############
-
-# Set history size
-# set -g history-limit 10000
-
-# Force terminal for 256 colors support
-set -g default-terminal "tmux-256color"
-# You can find the definition file here : https://github.com/tmux/tmux/files/1725937/tmux-256color.terminfo.txt
-# and install it with this command : tic -x tmux-256color.terminfo.txt
-# Alternative if tmux-256color is not available
-# set -g default-terminal "screen-256color"
-set -as terminal-overrides ",*256col*:RGB"
-set -as terminal-overrides ",*256col*:Tc"
-
-
-# Display titles
-set -g set-titles on
-set -g set-titles-string "#T"
-
-# Make splitting more intuitive
-unbind %
-# bind | split-window -h
-# bind _ split-window -v
-
-# Keybindings
-bind -n S-up new-window
-bind -n S-down new-window
-
-bind -n C-left prev
-bind -n C-right next
-
-bind -n S-left swap-window -t -1
-bind -n S-right swap-window -t +1
-
-bind z resize-pane -Z
-
-bind -n F8 new-window qbco
-# bind -n F8 new-window bash -c 'source ~/Repositories/Gitlab/bash-tools/libs/kgb.bash && source ~/Repositories/Gitlab/bash-tools/libs/misc.bash && qbco'
-bind -n F9 new-window qb9s
-bind -n S-F9 split-window qb9s
 
 # Other examples:
 # set -g @plugin 'github_username/plugin_name'
